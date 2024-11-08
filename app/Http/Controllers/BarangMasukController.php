@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BarangMasukExport;
 use App\Models\BarangMasuk;
 use App\Models\DataPusat;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 Carbon::setLocale('id');
@@ -47,6 +49,11 @@ class BarangMasukController extends Controller
         if ($request->has('download_pdf')) {
             $pdf = PDF::loadView('laporan.pdf_barangMasuk', compact('masuk'));
             return $pdf->download('laporan_barang_masuk.pdf'); //ini buat nama file download pdf
+        }
+
+        // download excel
+        if ($request->has('download_excel')) {
+            return Excel::download(new BarangMasukExport($masuk), 'laporan_barangMasuk.xlsx');
         }
 
         // $masuk = BarangMasuk::all();

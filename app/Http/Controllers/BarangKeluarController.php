@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BarangKeluarExport;
 use App\Models\BarangKeluar;
 use App\Models\DataPusat;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 Carbon::setLocale('id');
@@ -48,7 +50,10 @@ class BarangKeluarController extends Controller
             return $pdf->download('laporan_barang_keluar.pdf'); //ini buat nama file download pdf
         }
 
-        // $keluar = BarangKeluar::all();
+        // download excel
+        if ($request->has('download_excel')) {
+            return Excel::download(new BarangKeluarExport($keluar), 'laporan_barangKeluar.xlsx');
+        }
 
         confirmDelete('delete', 'Apakah Anda Yakin?');
         return view('BarangKeluar.index', compact('keluar'));

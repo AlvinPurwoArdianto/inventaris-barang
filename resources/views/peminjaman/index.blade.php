@@ -33,14 +33,13 @@
             </form>
 
             {{-- INI UNTUK BAGIAN BUTTON EXPORT --}}
-            <div class="row mt-3 ml-1">
+            <div class="row mt-3 ml-1" style="gap: 10px">
                 @if (!$pinjam->isEmpty())
-                    &nbsp;&nbsp;
                     <a href="{{ route('peminjaman.index', ['download_pdf' => true, 'tanggal_awal' => request('tanggal_awal'), 'tanggal_akhir' => request('tanggal_akhir')]) }}"
                         class="btn btn-danger ">Buat
                         PDF</a>
-                    &nbsp;&nbsp;
-                    <a href="" class="btn btn-success " type="submit">Buat EXCEL</a>
+                    <a href="{{ route('peminjaman.index', ['download_excel' => true, 'tanggal_awal' => request('tanggal_awal'), 'tanggal_akhir' => request('tanggal_akhir')]) }}"
+                        class="btn btn-success " type="submit">Buat EXCEL</a>
                 @endif
             </div>
 

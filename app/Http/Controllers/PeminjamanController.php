@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PeminjamanExport;
 use App\Models\DataPusat;
 use App\Models\Peminjaman;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 Carbon::setlocale('id');
@@ -50,6 +52,11 @@ class PeminjamanController extends Controller
         if ($request->has('download_pdf')) {
             $pdf = PDF::loadView('laporan.pdf_peminjaman', compact('pinjam'));
             return $pdf->download('laporan_peminjaman.pdf'); //ini buat nama file download pdf
+        }
+
+        // download excel
+        if ($request->has('download_excel')) {
+            return Excel::download(new PeminjamanExport($pinjam), 'laporan_peminjaman.xlsx');
         }
 
         confirmDelete('delete', 'Apakah Anda Yakin?');

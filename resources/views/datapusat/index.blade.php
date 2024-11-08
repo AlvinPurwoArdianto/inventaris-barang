@@ -26,41 +26,14 @@
                 Data Barang
             </h4>
 
-            {{-- INI BAGIAN UNTUK FILTER --}}
-            {{-- <form action="#" method="GET">
-                <div class="row">
-                    <div class="col-4">
-                        <input type="date" class="" name="tanggal_awal"
-                            value="#" required>
-                    </div>
-                    <div class="col-4">
-                        <input type="date" class="" name="tanggal_akhir"
-                            value="#" required>
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-primary " type="submit">Filter</button>
-                    </div>
-                    <div class="col-2">
-                        <a href="#" class="btn btn-danger "
-                            type="submit">Reset</a>
-                    </div>
-                </div>
-            </form> --}}
-
-
             {{-- INI UNTUK BAGIAN BUTTON EXPORT --}}
-            <div class="row mt-3 mr-2">
-                {{-- @if (!$pegawai->isEmpty()) --}}
-
-                {{-- <button id="lihatPdfButton" class="btn btn-secondary " data-bs-toggle="modal"
-                            data-bs-target="#pdfModal">Lihat PDF</button> --}}
-                &nbsp;&nbsp;
+            <div class="row mt-3 mr-2" style="gap: 10px">
                 <a href="{{ route('datapusat.index', ['download_pdf']) }}" class="btn btn-danger ">Buat PDF</a>
-                &nbsp;&nbsp;
-                <a href="" class="btn btn-success " type="submit">Buat EXCEL</a>
-
-                {{-- @endif --}}
+                <a href="{{ route('datapusat.index', ['download_excel' => true]) }}" class="btn btn-success"
+                    type="submit">Buat
+                    EXCEL</a>
             </div>
+
             <a href="{{ route('datapusat.create') }}" class="btn btn-info mt-3" style="float: right;">Tambah Data</a>
 
             {{-- <input type="text" class="form-control" id="exampleInputName1" placeholder="Nama Barang" name="nama" id="putih" style="color: #000; background-color: #f5f5f5;"> --}}

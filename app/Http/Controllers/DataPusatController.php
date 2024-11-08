@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DataPusatExport;
 use App\Models\DataPusat;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-// use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DataPusatController extends Controller
@@ -28,6 +29,11 @@ class DataPusatController extends Controller
         if ($request->has('download_pdf')) {
             $pdf = PDF::loadView('laporan.pdf_dataPusat', compact('datapusat'));
             return $pdf->download('laporan_data_pusat.pdf'); //ini buat download pdf
+        }
+
+        // download excel
+        if ($request->has('download_excel')) {
+            return Excel::download(new DataPusatExport($datapusat), 'laporan_dataPusat.xlsx');
         }
 
         confirmDelete('delete', 'Apakah Anda Yakin?');

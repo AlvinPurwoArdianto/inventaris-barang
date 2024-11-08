@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PengembalianExport;
 use App\Models\Peminjaman;
 use App\Models\Pengembalian;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 Carbon::setLocale('id');
 
@@ -43,6 +45,11 @@ class PengembalianController extends Controller
         if ($request->has('download_pdf')) {
             $pdf = PDF::loadView('laporan.pdf_pengembalian', compact('kembali'));
             return $pdf->download('laporan_pengembalian.pdf');
+        }
+
+        // download excel
+        if ($request->has('download_excel')) {
+            return Excel::download(new PengembalianExport($kembali), 'laporan_pengeluaran.xlsx');
         }
 
         return view('pengembalian.index', compact('kembali'));
