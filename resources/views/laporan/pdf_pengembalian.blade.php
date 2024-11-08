@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    <h1>Laporan Barang Peminjaman</h1>
+    <h1>Laporan Barang Pengembalian</h1>
     <table>
         <thead>
             <tr>

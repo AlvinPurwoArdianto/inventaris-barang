@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    <h1>Laporan Pegawai</h1>
+    <h1>Laporan Data Pusat</h1>
     <table>
         <thead>
             <tr>
